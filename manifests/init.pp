@@ -8,25 +8,14 @@ exec { 	"host":
 
 $userdata = parse_userdata()
 
-exec { 	"userdata":
-		command => "echo $userdata",
-}
+notify {"userdata: $userdata"}
 
     if has_key($userdata, 'hostname') {
         $hostname = $userdata['hostname']
-    } else {
-        warning('Unable to parse hostname from userdata')
-        $hostname = false
     }
     if has_key($userdata, 'puppet') and has_key($userdata['puppet'], 'server') {
         $puppet_server = $userdata['puppet']['server']
-    } else {
-        $puppet_server = false
     }
 
-exec { 	"hostname":
-		command => "echo $hostname",
-}
-exec { 	"puppet_server":
-		command => "echo $puppet_server",
-}
+notify {"hostname: $hostname"}
+notify {"puppet_server: $puppet_server"}
