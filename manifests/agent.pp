@@ -1,6 +1,4 @@
-class agent {
-  
-	class init {
+class agent::init {
 		Exec {
 			path => ["/usr/bin","/bin","/usr/sbin","/sbin"]
 		}
@@ -67,5 +65,4 @@ class agent {
 				}
 			}
 		}
-	}
 }
