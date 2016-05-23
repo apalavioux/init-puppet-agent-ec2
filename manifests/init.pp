@@ -47,6 +47,7 @@ class agent {
 			content => template('init-puppet-agent-ec2/hosts.erb'),
 			owner   => root,
 			group   => root,
+			ensure  => file,
 			mode    => 755,
 		}
 
