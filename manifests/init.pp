@@ -8,14 +8,15 @@ exec { 	"host":
 
 $userdata = parse_userdata()
 
-notify {"userdata: $userdata"}
+notify {"userdata: ${userdata}":}
 
-    if has_key($userdata, 'hostname') {
+    if has_key($userdata, 'vi ll
+	') {
         $hostname = $userdata['hostname']
     }
     if has_key($userdata, 'puppet') and has_key($userdata['puppet'], 'server') {
         $puppet_server = $userdata['puppet']['server']
     }
 
-notify {"hostname: $hostname"}
-notify {"puppet_server: $puppet_server"}
+notify {"hostname: ${$hostname}":}
+notify {"puppet_server: ${$puppet_server}":}
