@@ -2,7 +2,7 @@ Exec {
 		path => ["/usr/bin","/bin","/usr/sbin","/sbin"]
 }
 
-exec { 	"hostname":
+exec { 	"host":
 		command => "hostnamectl set-hostname puppet-agent-1",
 }
 
