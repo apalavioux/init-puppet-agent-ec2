@@ -48,6 +48,7 @@ class agent {
 			owner   => root,
 			group   => root,
 			ensure  => file,
+			ensure  => 'present',
 			mode    => 755,
 		}
 
