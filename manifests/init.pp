@@ -1,4 +1,4 @@
-class agent::init {
+class agent {
 		Exec {
 			path => ["/usr/bin","/bin","/usr/sbin","/sbin"]
 		}
