@@ -43,7 +43,7 @@ exec { 	"agent_runinterval":
 }
 
 file { '/etc/hosts':
-    content => template('hosts.erb'),
+    content => template('agent/hosts.erb'),
     owner   => root,
     group   => root,
     mode    => 755,
