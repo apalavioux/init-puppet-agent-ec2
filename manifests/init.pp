@@ -7,6 +7,9 @@ $userdata = parse_userdata()
 if has_key($userdata, 'hostname') {
 	$host_name = $userdata['hostname']
 }
+
+$public_dns = $facts['public-ipv4']
+
 if has_key($userdata, 'puppet') and has_key($userdata['puppet'], 'server') {
 	$puppet_server = $userdata['puppet']['server']
 }
@@ -24,12 +27,26 @@ line { network_host:
     file => "/etc/sysconfig/network",
     line => "HOSTNAME=${host_name}",
 }
+
 exec { 	"agent_puppet_server":
-	command => "puppet config set --section agent server ${puppet_server}",
+	command => "puppet config set --section main server ${puppet_server}",
 }
 
 exec { 	"agent_env":
-	command => "puppet config set --section agent environment production",
+	command => "puppet config set --section main environment production",
+}
+exec { 	"agent_certname":
+	command => "puppet config set --section main certname ${host_name}",
+}
+exec { 	"agent_runinterval":
+	command => "puppet config set --section main runinterval 10m",
+}
+
+file { '/etc/hosts':
+    content => template('hosts.erb'),
+    owner   => root,
+    group   => root,
+    mode    => 755,
 }
 
 define line($file, $line, $ensure = 'present') {
