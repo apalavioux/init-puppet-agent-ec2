@@ -1,4 +1,3 @@
-class agent {
 		Exec {
 			path => ["/usr/bin","/bin","/usr/sbin","/sbin"]
 		}
@@ -44,10 +43,11 @@ class agent {
 		}
 
 		file { '/etc/hosts':
+			path	=> '/etc/hosts',
 			content => template('init-puppet-agent-ec2/hosts.erb'),
 			owner   => root,
 			group   => root,
-			ensure  => present,
+			ensure  => file,
 			mode    => 755,
 		}
 
@@ -66,4 +66,3 @@ class agent {
 				}
 			}
 		}
-}
