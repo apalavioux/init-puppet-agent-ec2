@@ -50,7 +50,7 @@ class puppetagentinit::ec2 {
 			owner   => root,
 			group   => root,
 			ensure  => file,
-			mode    => 755,
+			mode    => '644',
 		}
 }
 
