@@ -1,4 +1,4 @@
-class init::ec2 {
+class puppetagentinit::ec2 {
 		Exec {
 			path => ["/usr/bin","/bin","/usr/sbin","/sbin"]
 		}
@@ -11,6 +11,9 @@ class init::ec2 {
 
 		$public_dns = $facts['public-ipv4']
 
+		$metadata = parse_metadata()
+		$public_dns = $metadata[public-ipv4]
+		
 		if has_key($userdata, 'puppet') and has_key($userdata['puppet'], 'server') {
 			$puppet_server = $userdata['puppet']['server']
 		}
@@ -45,7 +48,7 @@ class init::ec2 {
 
 		file { '/etc/hosts':
 			path	=> '/etc/hosts',
-			content => template('init-puppet-agent-ec2/hosts.erb'),
+			content => template('puppetagentinit/hosts.erb'),
 			owner   => root,
 			group   => root,
 			ensure  => file,
