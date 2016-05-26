@@ -1,3 +1,4 @@
+class init::ec2 {
 		Exec {
 			path => ["/usr/bin","/bin","/usr/sbin","/sbin"]
 		}
@@ -66,3 +67,4 @@
 				}
 			}
 		}
+}
