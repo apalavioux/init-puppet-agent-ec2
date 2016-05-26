@@ -17,7 +17,7 @@ class puppetagentinit::ec2 {
 		}
 
 		exec { 	"host":
-			command => "hostnamectl set-hostname ${host_name}",
+			command => "hostname ${host_name}",
 		}
 
 		line { preserve_host:
