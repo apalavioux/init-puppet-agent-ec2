@@ -9,8 +9,6 @@ class puppetagentinit::ec2 {
 			$host_name = $userdata['hostname']
 		}
 
-		$public_dns = $facts['public-ipv4']
-
 		$metadata = parse_metadata()
 		$public_dns = $metadata[public-ipv4]
 		
