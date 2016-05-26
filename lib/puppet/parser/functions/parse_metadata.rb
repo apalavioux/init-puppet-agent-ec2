@@ -5,7 +5,6 @@ module Puppet::Parser::Functions
         end
 
         begin
-            Puppet.warning("1")
             metadata = lookupvar('ec2_metadata')
 			hash = metadata
         rescue
