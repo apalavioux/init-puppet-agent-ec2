@@ -52,6 +52,7 @@ class puppetagentinit::ec2 {
 			ensure  => file,
 			mode    => 755,
 		}
+}
 
 		define line($file, $line, $ensure = 'present') {
 			case $ensure {
@@ -68,4 +69,3 @@ class puppetagentinit::ec2 {
 				}
 			}
 		}
-}
