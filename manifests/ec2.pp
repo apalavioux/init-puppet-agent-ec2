@@ -27,21 +27,21 @@ class puppetagentinit::ec2 {
 
 		line { network_host:
 			file => "/etc/sysconfig/network",
-			line => "HOSTNAME=${host_name}",
+			line => "HOSTNAME=${etc/cloud/cloud}",
 		}
 
 		exec { 	"agent_puppet_server":
-			command => "puppet config set --section main server ${puppet_server}",
+			command => "puppet config set --section agent server ${puppet_server}",
 		}
 
 		exec { 	"agent_env":
-			command => "puppet config set --section main environment production",
+			command => "puppet config set --section agent environment production",
 		}
 		exec { 	"agent_certname":
-			command => "puppet config set --section main certname ${host_name}",
+			command => "puppet config set --section agent certname ${host_name}",
 		}
 		exec { 	"agent_runinterval":
-			command => "puppet config set --section main runinterval 10m",
+			command => "puppet config set --section agent runinterval 10m",
 		}
 
 		file { '/etc/hosts':
