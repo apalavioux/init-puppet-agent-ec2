@@ -22,7 +22,7 @@ class puppetagentinit::ec2 {
 
 		line { preserve_host:
 			file => "/etc/cloud/cloud.cfg",
-			line => "preserve_host: true",
+			line => "preserve_hostname: true",
 		}
 
 		line { network_host:
