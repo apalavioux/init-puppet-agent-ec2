@@ -27,7 +27,7 @@ class puppetagentinit::ec2 {
 
 		line { network_host:
 			file => "/etc/sysconfig/network",
-			line => "HOSTNAME=${etc/cloud/cloud}",
+			line => "HOSTNAME=${host_name}",
 		}
 
 		exec { 	"agent_puppet_server":
