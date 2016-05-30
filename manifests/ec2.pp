@@ -1,3 +1,5 @@
+include aws
+
 class puppetagentinit::ec2 {
 		Exec {
 			path => ["/usr/bin","/bin","/usr/sbin","/sbin"]
@@ -8,16 +10,20 @@ class puppetagentinit::ec2 {
 		if has_key($userdata, 'hostname') {
 			$host_name = $userdata['hostname']
 		}
-
+		
+		if has_key($userdata, 'domainname') {
+			$domain_name = $userdata['domainname']
+		}
+		
 		$metadata = parse_metadata()
-		$public_dns = $metadata[local-ipv4]
+		$privateip = $metadata[local-ipv4]
 		
 		if has_key($userdata, 'puppet') and has_key($userdata['puppet'], 'server') {
 			$puppet_server = $userdata['puppet']['server']
 		}
 
 		exec { 	"host":
-			command => "hostname ${host_name}",
+			command => "hostnamectl set-hostname ${host_name}.${host_name}",
 		}
 
 		line { preserve_host:
@@ -25,9 +31,13 @@ class puppetagentinit::ec2 {
 			line => "preserve_hostname: true",
 		}
 
-		line { network_host:
-			file => "/etc/sysconfig/network",
-			line => "HOSTNAME=${host_name}",
+		file { '/etc/sysconfig/network':
+			path	=> '/etc/sysconfig/network',
+			content => template('puppetagentinit/network.erb'),
+			owner   => root,
+			group   => root,
+			ensure  => file,
+			mode    => '644',
 		}
 
 		exec { 	"agent_puppet_server":
@@ -39,7 +49,7 @@ class puppetagentinit::ec2 {
 		}
 		exec { 	"agent_certname":
 			command => "puppet config set --section agent certname ${host_name}",
-		}
+		}ll /
 		exec { 	"agent_runinterval":
 			command => "puppet config set --section agent runinterval 10m",
 		}
