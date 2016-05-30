@@ -24,7 +24,7 @@ class puppetagentinit::ec2 {
 		}
 
 		exec { 	"host":
-			command => "hostnamectl set-hostname ${host_name}.${host_name}",
+			command => "hostnamectl set-hostname ${host_name}.${domain_name}",
 		}
 
 		line { preserve_host:
@@ -70,7 +70,12 @@ class puppetagentinit::ec2 {
 			ensure => 'present',
 		}
 		
-}
+		route53_a_record { "${host_name}.${domain_name}.":
+			ensure => 'present',
+			ttl    => '300',
+			values => ["${::ipaddress}"],
+			zone   => 'sw-puppet.ch.', }
+		}
 
 		define line($file, $line, $ensure = 'present') {
 			case $ensure {
