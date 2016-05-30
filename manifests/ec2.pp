@@ -1,6 +1,7 @@
 include aws
 
 class puppetagentinit::ec2 {
+
 		Exec {
 			path => ["/usr/bin","/bin","/usr/sbin","/sbin"]
 		}
@@ -64,6 +65,11 @@ class puppetagentinit::ec2 {
 			ensure  => file,
 			mode    => '644',
 		}
+		
+		route53_zone { 'puppetlabs.com.':
+			ensure => 'present',
+		}
+		
 }
 
 		define line($file, $line, $ensure = 'present') {
