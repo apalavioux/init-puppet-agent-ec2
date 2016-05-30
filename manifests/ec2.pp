@@ -10,7 +10,7 @@ class puppetagentinit::ec2 {
 		}
 
 		$metadata = parse_metadata()
-		$public_dns = $metadata[PrivateIpAddress]
+		$public_dns = $metadata[local-ipv4]
 		
 		if has_key($userdata, 'puppet') and has_key($userdata['puppet'], 'server') {
 			$puppet_server = $userdata['puppet']['server']
