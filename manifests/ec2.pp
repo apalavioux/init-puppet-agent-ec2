@@ -66,7 +66,7 @@ class puppetagentinit::ec2 {
 			mode    => '644',
 		}
 		
-		route53_zone { 'puppetlabs.com.':
+		route53_zone { 'sw-puppet.ch.':
 			ensure => 'present',
 		}
 		
