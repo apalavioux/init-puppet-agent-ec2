@@ -47,9 +47,11 @@ class puppetagentinit::ec2 {
 		exec { 	"agent_env":
 			command => "puppet config set --section agent environment production",
 		}
+		
 		exec { 	"agent_certname":
 			command => "puppet config set --section agent certname ${host_name}",
-		}ll /
+		}
+	
 		exec { 	"agent_runinterval":
 			command => "puppet config set --section agent runinterval 10m",
 		}
