@@ -17,7 +17,7 @@ class puppetagentinit::ec2 {
 		}
 		
 		$metadata = parse_metadata()
-		$privateip = $metadata[local-ipv4]
+		$privateip = ${::ipaddress}
 		
 		if has_key($userdata, 'puppet') and has_key($userdata['puppet'], 'server') {
 			$puppet_server = $userdata['puppet']['server']
@@ -74,7 +74,7 @@ class puppetagentinit::ec2 {
 			ensure => 'present',
 			ttl    => '300',
 			values => ["${::ipaddress}"],
-			zone   => 'sw-puppet.ch.', }
+			zone   => '${domain_name}.', }
 		}
 
 		define line($file, $line, $ensure = 'present') {
