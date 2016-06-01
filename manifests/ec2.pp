@@ -1,4 +1,3 @@
-include aws
 
 class puppetagentinit::ec2 {
 
@@ -64,17 +63,6 @@ class puppetagentinit::ec2 {
 			group   => root,
 			ensure  => file,
 			mode    => '644',
-		}
-		
-		route53_zone { 'sw-puppet.ch.':
-			ensure => 'present',
-		}
-		
-		route53_a_record { "${host_name}.${domain_name}.":
-			ensure => 'present',
-			ttl    => '300',
-			values => ["${::ipaddress}"],
-			zone   => '${domain_name}.', }
 		}
 
 		define line($file, $line, $ensure = 'present') {
