@@ -63,7 +63,8 @@ class puppetagentinit::ec2 {
 			group   => root,
 			ensure  => file,
 			mode    => '644',
-		}
+		}	
+}
 
 		define line($file, $line, $ensure = 'present') {
 			case $ensure {
