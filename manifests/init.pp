@@ -1,20 +1,19 @@
+class init_puppet_agent_ec2 {
 
-class puppetagentinit::ec2 {
+  Exec {
+    path => ['/usr/bin','/bin','/usr/sbin','/sbin']
+  }
 
-		Exec {
-			path => ["/usr/bin","/bin","/usr/sbin","/sbin"]
-		}
-
-		$userdata = parse_userdata()
+  $userdata = parse_userdata()
 
 		if has_key($userdata, 'hostname') {
 			$host_name = $userdata['hostname']
 		}
-		
+
 		if has_key($userdata, 'domainname') {
 			$domain_name = $userdata['domainname']
 		}
-		
+
 		$metadata = parse_metadata()
 		$privateip = $metadata[local-ipv4]
 
@@ -47,11 +46,11 @@ class puppetagentinit::ec2 {
 		exec { 	"agent_env":
 			command => "puppet config set --section agent environment production",
 		}
-		
+
 		exec { 	"agent_certname":
 			command => "puppet config set --section agent certname ${host_name}",
 		}
-	
+
 		exec { 	"agent_runinterval":
 			command => "puppet config set --section agent runinterval 10m",
 		}
@@ -63,7 +62,7 @@ class puppetagentinit::ec2 {
 			group   => root,
 			ensure  => file,
 			mode    => '644',
-		}	
+		}
 }
 
 		define line($file, $line, $ensure = 'present') {
