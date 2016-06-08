@@ -35,7 +35,7 @@ class set_hostname_ec2 {
   file { '/etc/sysconfig/network':
     ensure  => file,
     path    => '/etc/sysconfig/network',
-    content => template('$module_name/network.erb'),
+    content => template('set_hostname_ec2/network.erb'),
     owner   => root,
     group   => root,
     mode    => '0644',
@@ -60,7 +60,7 @@ class set_hostname_ec2 {
   file { '/etc/hosts':
     ensure  => file,
     path    => '/etc/hosts',
-    content => template('$module_name/hosts.erb'),
+    content => template('set_hostname_ec2/hosts.erb'),
     owner   => root,
     group   => root,
     mode    => '0644',
