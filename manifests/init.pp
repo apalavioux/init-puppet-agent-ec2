@@ -1,3 +1,5 @@
+# set_hostname_ec2, base class to set hostname on ec2 instances. Only CentOs 7
+# for now.
 class set_hostname_ec2 {
 
   Exec {
@@ -25,7 +27,7 @@ class set_hostname_ec2 {
     command => "hostnamectl set-hostname ${host_name}.${domain_name}",
   }
 
-  line { 'preserve_host':
+  set_hostname_ec2::line { 'preserve_host':
     file => '/etc/cloud/cloud.cfg',
     line => 'preserve_hostname: true',
   }
@@ -33,7 +35,7 @@ class set_hostname_ec2 {
   file { '/etc/sysconfig/network':
     ensure  => file,
     path    => '/etc/sysconfig/network',
-    content => template('puppetagentinit/network.erb'),
+    content => template('$module_name/network.erb'),
     owner   => root,
     group   => root,
     mode    => '0644',
@@ -58,7 +60,7 @@ class set_hostname_ec2 {
   file { '/etc/hosts':
     ensure  => file,
     path    => '/etc/hosts',
-    content => template('puppetagentinit/hosts.erb'),
+    content => template('$module_name/hosts.erb'),
     owner   => root,
     group   => root,
     mode    => '0644',

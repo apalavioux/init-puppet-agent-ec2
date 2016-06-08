@@ -1,3 +1,4 @@
+#set_hostname_ec2::line, helper resource to check a line exists in a file.
 define set_hostname_ec2::line($file, $line, $ensure = 'present') {
   case $ensure {
     default : { err ( "unknown ensure value ${ensure}" ) }
