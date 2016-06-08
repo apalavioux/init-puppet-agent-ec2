@@ -1,4 +1,4 @@
-define init_puppet_agent_ec2::line($file, $line, $ensure = 'present') {
+define set_hostname_ec2::line($file, $line, $ensure = 'present') {
   case $ensure {
     default : { err ( "unknown ensure value ${ensure}" ) }
     present: {

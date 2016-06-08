@@ -1,4 +1,4 @@
-class init_puppet_agent_ec2 {
+class set_hostname_ec2 {
 
   Exec {
     path => ['/usr/bin','/bin','/usr/sbin','/sbin']
