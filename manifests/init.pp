@@ -50,7 +50,7 @@ class set_hostname_ec2 {
   }
 
   exec {   'agent_certname':
-    command => "puppet config set --section agent certname ${host_name}",
+    command => "puppet config set --section agent certname ${host_name}.${domain_name}",
   }
 
   exec {   'agent_runinterval':
