@@ -34,7 +34,7 @@ class set_hostname_ec2 {
   }elsif $::ec2_tag_puppet_env {
     $puppet_env = $::ec2_tag_puppet_env
   }
-  
+
   $puppet_runinterval = '10m'
   if $::ec2_tag_puppet_runinterval {
     $puppet_runinterval = $::ec2_tag_puppet_runinterval
@@ -80,8 +80,7 @@ class set_hostname_ec2 {
       command => "puppet config set --section agent environment ${puppet_env}",
     }
   }
-    exec {   'agent_runinterval':
-      command => "puppet config set --section agent runinterval ${puppet_runinterval}",
-    }
+  exec {   'agent_runinterval':
+    command => "puppet config set --section agent runinterval ${puppet_runinterval}",
   }
 }
