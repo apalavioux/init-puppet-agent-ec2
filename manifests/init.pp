@@ -17,7 +17,7 @@ class set_hostname_ec2 {
   if has_key($userdata, 'domainname') {
     $domain_name = $userdata['domainname']
   }elsif $::ec2_tag_domain {
-    $domain_name = $::ec2_tag_hostname
+    $domain_name = $::ec2_tag_domain
   }
 
   $metadata = parse_metadata()
