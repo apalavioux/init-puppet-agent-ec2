@@ -35,9 +35,10 @@ class set_hostname_ec2 {
     $puppet_env = $::ec2_tag_puppet_env
   }
 
-  $puppet_runinterval = '10m'
   if $::ec2_tag_puppet_runinterval {
     $puppet_runinterval = $::ec2_tag_puppet_runinterval
+  }else{
+    $puppet_runinterval = '10m'
   }
 
   if $host_name and $domain_name {
